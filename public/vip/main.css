@@ -19,9 +19,14 @@ video#bgvid {
 
 div#list {
      margin: 10px;
-    margin-bottom: 100px;
     text-align:center;
  }
+
+#credits {
+    color : white;
+    margin-bottom: 12vh;
+    font: bold 15px/1.5 Helvetica, Verdana, sans-serif;
+}
 
 ul {
     list-style-type: none;
@@ -31,15 +36,30 @@ ul {
     background: rgba(255,255,255,0.2);
     margin : 20px;
     border-radius: 2px;
+}
 
+ul.mobile {
+    width: 95vw;
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    margin : 20px;
+    border-radius: 2px;
 }
 
 h3 {
     font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
 }
 
+h3.mobile {
+    font: bold 5vw/1.5 Helvetica, Verdana, sans-serif;
+}
+
 h2 {
     font: bold 15px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+h2.mobile {
+    font: bold 3vw/1.5 Helvetica, Verdana, sans-serif;
 }
 
 li img {
@@ -70,7 +90,16 @@ li:hover {
 }
 
 #playbar {
-    height: 80px;
+     height: 80px;
+     position: fixed;
+     bottom:0;
+     width:100%;
+     background-color: #fff;
+     opacity: 1;
+ }
+
+#playbar.mobile {
+    height: 15vh;
     position: fixed;
     bottom:0;
     width:100%;
@@ -88,6 +117,11 @@ button {
     height: 50px;
     margin: 5px 5px 5px 5px;
     outline: none;
+}
+
+#playbar.mobile > #wrapper > button {
+    width: 7vh;
+    height: 7vh;
 }
 
 
@@ -206,6 +240,21 @@ progress[value]#seekbar::-webkit-progress-value {
     margin: 15px;
     position:absolute;
 
+}
+
+#playbar.mobile > #info {
+    margin: 0;
+    left: 1vw;
+    bottom : 1vh;
+    position:absolute;
+}
+
+#playbar.mobile > #info > h3 {
+    font: bold 2vh/1.5 Helvetica, Verdana, sans-serif;
+}
+
+#playbar.mobile > #info > h2 {
+    font: bold 1.5vh/1.5 Helvetica, Verdana, sans-serif;
 }
 
 #gametitle, #songtitle {
