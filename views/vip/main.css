@@ -1,0 +1,264 @@
+video#bgvid {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(bg.jpg) no-repeat;
+    background-size: cover;
+}
+
+* {margin: 0; padding: 0;}
+
+div#list {
+     margin: 10px;
+    margin-bottom: 100px;
+    text-align:center;
+ }
+
+ul {
+    list-style-type: none;
+    width: 50vw;
+    min-width: 500px;
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    margin : 20px;
+    border-radius: 2px;
+
+}
+
+h3 {
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+h2 {
+    font: bold 15px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+li img {
+    float: left;
+    margin: 0 15px 0 0;
+}
+
+li p {
+    font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+li {
+    background: rgba(255,255,255,0.3);
+    padding: 10px;
+    overflow: auto;
+    text-align:left;
+    margin : 10px;
+    border-radius: 2px;
+}
+
+li:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+.selected {
+    background: #fff;
+}
+
+#playbar {
+    height: 80px;
+    position: fixed;
+    bottom:0;
+    width:100%;
+    background-color: #fff;
+    opacity: 1;
+}
+
+#wrapper {
+    text-align: center;
+}
+
+button {
+    border:none;
+    width: 50px;
+    height: 50px;
+    margin: 5px 5px 5px 5px;
+    outline: none;
+}
+
+
+button#play {
+    background: url(./icons/pause.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120%;
+    filter: alpha(Opacity=70);
+    opacity: 0.7;
+}
+
+.paused {
+    background: url(./icons/play.png) no-repeat center !important;
+    background-size: 120% !important;
+}
+
+button#play:hover {
+    background-size: 140%;
+    filter: alpha(Opacity=100);
+    opacity: 1;
+}
+
+button#play:active {
+    background-size: 160%;
+}
+
+button#skip_before {
+    background: url(./icons/skip_before.png) no-repeat center center;
+    background-size: 80%;
+    filter: alpha(Opacity=70);
+    opacity: 0.7;
+}
+button#skip_before:hover {
+    filter: alpha(Opacity=100);
+    opacity: 1;
+}
+
+button#skip_next {
+    background: url(./icons/skip_next.png) no-repeat center center;
+    background-size: 80%;
+    filter: alpha(Opacity=70);
+    opacity: 0.7;
+}
+button#skip_next:hover {
+    filter: alpha(Opacity=100);
+    opacity: 1;
+}
+
+
+button#shuffle {
+    background: url(./icons/shuffle.png) no-repeat center center;
+    background-size: 70%;
+    filter: alpha(Opacity=50);
+    opacity: 0.5;
+}
+button#shuffle:hover {
+    filter: alpha(Opacity=80);
+    opacity: 0.8;
+}
+button#shuffle:active {
+    background-size: 90%;
+}
+
+.enabled {
+    filter: alpha(Opacity=100) !important;
+    opacity: 1 !important;
+}
+
+
+button#repeat {
+    background: url(./icons/repeat.png) no-repeat center center;
+    background-size: 70%;
+    filter: alpha(Opacity=70);
+    opacity: 0.7;
+}
+button#repeat:hover {
+    filter: alpha(Opacity=100);
+    opacity: 1;
+}
+
+progress[value]#seekbar {
+
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+
+    display: block;
+    margin: auto;
+    margin-top : -3px;
+
+
+    width: 550px;
+    height: 15px;
+    border: 5px solid white;
+}
+
+progress[value]#seekbar:hover {
+    height: 18px;
+    cursor:pointer;
+}
+
+progress[value]#seekbar::-webkit-progress-bar {
+    background-color: #ccc;
+    border-radius: 2px;
+}
+
+progress[value]#seekbar::-webkit-progress-value {
+    background-color: #666;
+
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+#info {
+    margin: 15px;
+    position:absolute;
+
+}
+
+#gametitle, #songtitle {
+}
+
+#volumeWrapper {
+
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+}
+
+#volume {
+    vertical-align:middle;
+    background: url(./icons/volume_big.png) no-repeat center center;
+    background-size: 80%;
+}
+
+.smallVolume {
+    background: url(./icons/volume_small.png) no-repeat center center !important;
+    background-size: 80% !important;
+}
+
+.muteVolume {
+    background: url(./icons/mute.png) no-repeat center center !important;
+    background-size: 80% !important;
+}
+
+progress[value]#volumebar {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 100px;
+    height: 15px;
+    border: 5px solid white;
+}
+
+progress[value]#volumebar::-webkit-progress-bar {
+    background-color: #ccc;
+    border-radius: 2px;
+}
+
+progress[value]#volumebar::-webkit-progress-value {
+    background-color: #666;
+
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+span#current {
+
+}
+
+span#total{
+
+}

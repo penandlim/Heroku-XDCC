@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vidya Intarweb Playist HTML5</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+<video playsinline autoplay muted loop poster="bg.jpg" id="bgvid">
+    <source src="bg3.webm" type="video/webm">
+</video>
+<div id="list"></div>
+<div id="playbar">
+    <div id="info">
+        <h3 id="gametitle"></h3>
+        <h2 id="songtitle"></h2>
+    </div>
+    <div id="wrapper">
+        <button id="shuffle"></button>
+        <button id="skip_before"></button>
+        <button id="play"></button>
+        <button id="skip_next"></button>
+        <button id="repeat"></button>
+        <progress id="seekbar" value="0" max="1000"></progress>
+    </div>
+    <div id="volumeWrapper">
+        <button id="volume"></button>
+        <progress id="volumebar" value="50" max="100"></progress>
+
+    </div>
+</div>
+<script
+        src="howler.core.js"></script>
+<script
+        src="jquery-3.1.0.js"></script>
+
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
