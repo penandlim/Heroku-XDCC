@@ -92,7 +92,7 @@ button {
 
 
 button#play {
-    background: url(./icons/pause.png);
+    background: url(icons/pause.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 120%;
@@ -101,7 +101,7 @@ button#play {
 }
 
 .paused {
-    background: url(./icons/play.png) no-repeat center !important;
+    background: url(icons/play.png) no-repeat center !important;
     background-size: 120% !important;
 }
 
@@ -116,7 +116,7 @@ button#play:active {
 }
 
 button#skip_before {
-    background: url(./icons/skip_before.png) no-repeat center center;
+    background: url(icons/skip_before.png) no-repeat center center;
     background-size: 80%;
     filter: alpha(Opacity=70);
     opacity: 0.7;
@@ -127,7 +127,7 @@ button#skip_before:hover {
 }
 
 button#skip_next {
-    background: url(./icons/skip_next.png) no-repeat center center;
+    background: url(icons/skip_next.png) no-repeat center center;
     background-size: 80%;
     filter: alpha(Opacity=70);
     opacity: 0.7;
@@ -139,7 +139,7 @@ button#skip_next:hover {
 
 
 button#shuffle {
-    background: url(./icons/shuffle.png) no-repeat center center;
+    background: url(icons/shuffle.png) no-repeat center center;
     background-size: 70%;
     filter: alpha(Opacity=50);
     opacity: 0.5;
@@ -159,7 +159,7 @@ button#shuffle:active {
 
 
 button#repeat {
-    background: url(./icons/repeat.png) no-repeat center center;
+    background: url(icons/repeat.png) no-repeat center center;
     background-size: 70%;
     filter: alpha(Opacity=70);
     opacity: 0.7;
@@ -220,17 +220,17 @@ progress[value]#seekbar::-webkit-progress-value {
 
 #volume {
     vertical-align:middle;
-    background: url(./icons/volume_big.png) no-repeat center center;
+    background: url(icons/volume_big.png) no-repeat center center;
     background-size: 80%;
 }
 
 .smallVolume {
-    background: url(./icons/volume_small.png) no-repeat center center !important;
+    background: url(icons/volume_small.png) no-repeat center center !important;
     background-size: 80% !important;
 }
 
 .muteVolume {
-    background: url(./icons/mute.png) no-repeat center center !important;
+    background: url(icons/mute.png) no-repeat center center !important;
     background-size: 80% !important;
 }
 
