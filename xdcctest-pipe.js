@@ -48,7 +48,7 @@ module.exports = function (socket) {
                 xdccInstance.on('progress', function (totalReceived) {
                     let temp = Math.round((totalReceived * 100) / filesize );
                     if (temp > percentage) {
-                        socket.emit("downloading", {name: config.filename, percent : temp});
+                        socket.emit("downloading", {name: myConfig.filename, percent : temp});
                         console.log( percentage + "% " +totalReceived + " / " + filesize);
                         percentage = temp;
                     }
