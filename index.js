@@ -1,9 +1,7 @@
+var xdcctest = require('./xdcctest.js');
+
 var express = require('express');
 var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-
-server.listen(80);
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -25,14 +23,19 @@ app.get('/mongolian/', function(request, response) {
     response.render('mongolian/index');
 });
 
-app.listen(app.get('port'), function() {
+var server = app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
+var io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
     console.log("client connected");
     socket.on('disconnect', () => console.log("client disconnected"));
+    socket.on('initiate', function (data) {
+        console.log("lets try calling the xdccfunction");
+        xdcctest.connectIRC(data.botname, data.packnum);
+    });
 });
 
 setInterval(() => io.emit("time", new Date().toTimeString()), 1000);
