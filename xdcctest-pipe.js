@@ -19,7 +19,7 @@ module.exports = function (socket) {
             res.writeHead(200, {
                 'Content-Type': mime.contentType(myConfig.filename),
                 'Content-Disposition': 'attachment; filename="' + myConfig.filename + '"; modification-date="Wed, 12 Feb 1997 16:29:51 -0500"',
-                'Content-Length' : config.filesize
+                'Content-Length' : myConfig.filesize
             });
             myInstance.pipe(res);
         }
