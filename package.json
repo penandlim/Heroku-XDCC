@@ -15,7 +15,7 @@
     "express": "4.15.2",
     "irc": "martynsmith/node-irc",
     "mime-types": "^2.1.17",
-    "piped-xdcc": "vtertre/piped-xdcc",
+    "piped-xdcc": "penandlim/piped-xdcc",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
