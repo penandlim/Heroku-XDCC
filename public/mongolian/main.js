@@ -1,18 +1,36 @@
 
-var WebTorrent = require('webtorrent');
+// var WebTorrent = require('webtorrent');
 
-var client = new WebTorrent();
-var magnetURI = 'magnet:?xt=urn:btih:S5PAMK7R4OVV44ONTGS4VL5IHHFS6RYH&tr=http%3A%2F%2Fanidex.moe%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=http%3A%2F%2Fizetta.encore.pw%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.minglong.org%3A8080%2Fannounce';
+// load irc-xdcc module
+var ircXdcc = require('irc-xdcc')
+// set options object
+    , ircOptions = {
+        userName: 'ircClient'
+        , realName: 'irc Client'
+        , port: 6697
+        , autoRejoin: true
+        , autoConnect: true
+        , channels: [ '#xdcc', '#xdcc-chat' ]
+        , secure: true
+        , selfSigned: true
+        , certExpired: true
+        , stripColors: true
+        , encoding: 'UTF-8'
+        // xdcc specific options
+        , progressInterval: 5
+        , destPath: './dls'
+        , resume: false
+        , acceptUnpooled: true
+        , closeConnectionOnDisconnect: false
+    }
+// used to store bot instance
+    , botInstance
+    ;
 
-(function() {
-    client.add(magnetURI, function (torrent) {
-        // Got torrent metadata!
-        console.log('Client is downloading:', torrent.infoHash)
-
-        torrent.files.forEach(function (file) {
-            // Display the file by appending it to the DOM. Supports video, audio, images, and
-            // more. Specify a container element (CSS selector or reference to DOM node).
-            file.appendTo('body')
-        })
+// construct instance using promise
+ircXdcc('irc.myserver.com', 'myBotNick', ircOptions)
+    .then(function(instance) {
+        botInstance = instance;
+        botInstance.addListener('registered', function() { console.log('bot connected'); });
     })
-})();
+    .catch(console.error.bind(console));
