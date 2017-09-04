@@ -44,7 +44,7 @@ module.exports = function (socket) {
             console.log("myConfig = " + myConfig);
             res.writeHead(200, {
                 'Content-Type': mime.contentType(myConfig.filename),
-                'Content-Disposition': 'attachment; filename="' + myConfig.filename + '"; modification-date="Wed, 12 Feb 1997 16:29:51 -0500"',
+                'Content-Disposition': 'inline; filename="' + myConfig.filename + '"; modification-date="Wed, 12 Feb 1997 16:29:51 -0500"',
                 'Content-Length' : myConfig.filesize
             });
             global.endPipe.pipe(res);
@@ -108,12 +108,18 @@ module.exports = function (socket) {
                         filesize : config.filesize
                     };
                     global.lastInfo.lastTitle = config.filename;
+                    let startConfig = {
+                        filename : config.filename,
+                        ip : config.ip,
+                        port : config.port
+                    };
+
                     setTimeout(function () {
-                        if (global.lastInfo.lastPercentage == "pending") {
+                        if (global.lastInfo.lastPercentage == "0" && startConfig.filename == global.lastInfo.lastTitle && startConfig.ip == global.lastInfo.ip && startConfig.port == global.lastInfo.port) {
                             console.log("Timed out");
                             finished();
                         }
-                    }, 45000);
+                    }, 45000, startConfig);
                     socket.emit("download", config);
                 });
 
@@ -158,6 +164,7 @@ module.exports = function (socket) {
         global.client.on('notice', function(from, to, message) {
             if (to == user && from == bot) {
                 console.log("[notice]", message);
+                socket.emit("error", message);
             }
         });
 
@@ -166,13 +173,6 @@ module.exports = function (socket) {
             finished();
         });
 
-
-
-        function checkIfConnected() {
-            setTimeout(function(){
-                checkIfConnected();
-            }, 2000);
-        }
 
     };
 
