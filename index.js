@@ -17,6 +17,10 @@ app.get('/vip/', function(request, response) {
     response.render('vip/index');
 });
 
+app.get('/mongolian/', function(request, response) {
+    response.render('mongolian/index');
+});
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
