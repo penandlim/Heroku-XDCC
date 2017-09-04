@@ -4,6 +4,8 @@
 
 
 module.exports = function (socket) {
+    var PassThrough = require('stream').PassThrough;
+
     var module = {};
 
     var irc = require('irc');
@@ -11,101 +13,166 @@ module.exports = function (socket) {
     var fs = require("fs");
     var mime = require('mime-types');
 
-    var myInstance, myConfig;
+    global.myConfig = {
+        command: "",
+        filename: "",
+        ip : "",
+        port : 0,
+        filesize : 0
+    };
+    global.client = null;
+
+
+    var finished = function() {
+        if (global.client !== null) {
+            global.client.say(global.botname, "XDCC CANCEL");
+            console.log("DISCONNECTED");
+            global.client.removeAllListeners('join');
+            global.client.removeAllListeners('notice');
+            global.client.removeAllListeners('error');
+            global.client.disconnect();
+        }
+        console.log("RESET name");
+        global.lastInfo.busy = false;
+        global.lastInfo.lastTitle = "pending";
+        global.lastInfo.lastPercentage = "0";
+        global.botname = "";
+    };
 
     module.stream = function (req, res) {
-        if (myInstance != null)
-        {
+        if (global.endPipe !== null) {
+            console.log("myConfig = " + myConfig);
             res.writeHead(200, {
                 'Content-Type': mime.contentType(myConfig.filename),
                 'Content-Disposition': 'attachment; filename="' + myConfig.filename + '"; modification-date="Wed, 12 Feb 1997 16:29:51 -0500"',
                 'Content-Length' : myConfig.filesize
             });
-            myInstance.pipe(res);
+            global.endPipe.pipe(res);
+            res.on('close', function() {
+                finished();
+                console.log('file done');
+                res.status(400);
+                res.end();
+            }).on('error', function() {
+                finished();
+                console.log('ERROR');
+                res.status(400);
+                res.send("Something went wrong. Try it again.");
+            });
+        } else {
+            res.send("not initialized for some reason");
         }
     };
 
+    module.cancel = function (req, res) {
+        finished();
+        console.log("visited cancel");
+        if (global.endPipe != null) {
+            global.endPipe.end();
+        }
+        res.send("canceled");
+
+        // res.redirect("http" + (req.socket.encrypted ? "s" : "") + "://" +
+        //     req.headers.host + "/mongolian/error/");
+    };
+
     module.connectIRC = function (bot, pack) {
+        global.botname = bot;
         var url = 'irc.rizon.net';
         var user = 'desu' + Math.random().toString(36).substr(7, 3);
 
+        console.log('Connecting to ' + url);
+
+        global.client = new irc.Client(url, user, {
+            channels: ['#nibl'],
+            userName: user,
+            realName: user
+        });
+
         var pipeCallback = function (message, xdccInstance) {
-            var filesize = 0;
+            global.endPipe = xdccInstance;
+
             var percentage = 0;
 
             if (message == null) {
                 console.log("it probably went good");
 
                 xdccInstance.on('connect', function (config) {
-                    myInstance = xdccInstance;
-                    myConfig = config;
-                    filesize = config.filesize;
+                    console.log("config = " + config.filesize);
+                    global.myConfig = {
+                        command: config.command,
+                        filename: config.filename,
+                        ip : config.ip,
+                        port : config.port,
+                        filesize : config.filesize
+                    };
+                    global.lastInfo.lastTitle = config.filename;
+                    setTimeout(function () {
+                        if (global.lastInfo.lastPercentage == "pending") {
+                            console.log("Timed out");
+                            finished();
+                        }
+                    }, 45000);
                     socket.emit("download", config);
-                    console.log("Started downloading" + config.filename + " from " + config.ip);
                 });
 
                 xdccInstance.on('progress', function (totalReceived) {
-                    let temp = Math.round((totalReceived * 100) / filesize );
+                    let temp = Math.round((totalReceived * 100) / global.myConfig.filesize );
                     if (temp > percentage) {
-                        socket.emit("downloading", {name: myConfig.filename, percent : temp});
-                        console.log( percentage + "% " +totalReceived + " / " + filesize);
+                        socket.emit("downloading", {name: global.myConfig.filename, percent : temp});
+                        global.lastInfo.lastPercentage = temp;
+                        console.log( percentage + "% " + totalReceived + " / " + global.myConfig.filesize);
                         percentage = temp;
                     }
                 });
 
                 xdccInstance.on('complete', function (config) {
+                    socket.emit("finished");
                     console.log("Downloaded " + config.filename + " from " + config.ip);
-                    if (myInstance != null) {
-                        myInstance.destroy();
-                    }
-                    myInstance = null;
-                    client.disconnect();
+                    global.endPipe = null;
+                    finished();
                 });
 
                 xdccInstance.on('dlerror', function (error, config) {
                     console.log("Error");
                     console.log(error);
-                    if (myInstance != null) {
-                        myInstance.destroy();
-                    }
-                    myInstance = null;
-                    client.disconnect();
+                    socket.emit("error", error);
+                    global.endPipe = null;
+                    finished();
                 });
             } else {
+                socket.emit("error", message);
                 console.log(message);
-                if (myInstance != null) {
-                    myInstance.destroy();
-                }
-                myInstance = null;
-                client.disconnect();
+                global.endPipe = null;
+                finished();
             }
         };
 
-        console.log('Connecting to ' + url);
-
-        var client = new irc.Client(url, user, {
-            channels: ['#nibl'],
-            userName: user,
-            realName: user
-        });
-
-        client.on('join', function(channel, nick, message) {
+        global.client.on('join', function(channel, nick, message) {
             if (nick !== user) return;
             console.log('Joined ', channel);
-            pipedXdcc.pipeXdccRequest(client, {botNickname: bot, packNumber: pack}, pipeCallback);
+            pipedXdcc.pipeXdccRequest(global.client, {botNickname: bot, packNumber: pack}, pipeCallback);
         });
 
-        var last = 0;
-
-        client.on('notice', function(from, to, message) {
+        global.client.on('notice', function(from, to, message) {
             if (to == user && from == bot) {
                 console.log("[notice]", message);
             }
         });
 
-        client.on('error', function(message) {
+        global.client.on('error', function(message) {
             console.error(message);
+            finished();
         });
+
+
+
+        function checkIfConnected() {
+            setTimeout(function(){
+                checkIfConnected();
+            }, 2000);
+        }
+
     };
 
     return module;

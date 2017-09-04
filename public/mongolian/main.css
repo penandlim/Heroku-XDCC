@@ -1,14 +1,102 @@
-body {
-    text-align: center;
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+html,body{ margin:0; padding:0; height:100%; width:100%;}
+#full-size{
+
+}
 input {
     width : 500px;
     text-align: center;
+    border: 1px black solid;
+}
+p {
+    white-space: pre;
 }
 
+h1, h2 {
+    margin: 0;
+}
 div#wrapper {
-    margin-left:auto;
-    margin-right:auto;
-    width:960px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    padding:15px;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+#buttonwrapper {
+    text-align: center;
+}
+#usercountwrapper {
+    text-align: right;
+    margin-bottom : 0;
+}
+
+#credits {
+    text-align : right;
+    font-style : italic;
+}
+
+#status {
+    margin-top : 20px;
+    margin-bottom: 10px;
+}
+
+
+
+h1 {
+    font-family: "Droid Sans Mono";
+    font-size: 28px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 800;
+    line-height: 26.4px;
+    margin-bottom: 5px;
+}
+h2 {
+    font-family: "Droid Sans Mono";
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 800;
+    line-height: 15.4px;
+    margin-top : 10px;
+}
+
+h3 {
+    font-family: "Droid Sans Mono";
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+p {
+    font-family: "Droid Sans Mono";
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+blockquote {
+    font-family: "Droid Sans Mono";
+    font-size: 21px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+pre {
+    font-family: "Droid Sans Mono";
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
 }

@@ -1,14 +1,24 @@
 var socket = io.connect();
 
 socket.on ('download', function(config) {
-    $("#status").text("Downloading " + config.filename);
-    setTimeout(function() {
-        window.location.href = 'download/';
-    }, 3000);
+    window.location.href = 'download/';
+    $("#status").text("Fetching " + config.filename + "...\nPlease wait...");
 });
 
-socket.on ('downloading', function() {
-    $("#status").text("Someone is using the service!! Back off!!");
+socket.on ('wait', function(lastinfo) {
+    $("#status").html("Sorry please try again a bit later!\nSomeone is downloading... \n<b>" + lastinfo.lastTitle + "</b>\nIt's currently at <b>" + lastinfo.lastPercentage + "</b>%");
+});
+
+socket.on ('usercount', function(count) {
+    $("#usercount").text(count);
+});
+
+socket.on ('error', function(msg) {
+    $("#status").html(msg);
+});
+
+socket.on ('finished', function(msg) {
+    $("#status").html("Copy and paste the command here: ");
 });
 
 $("#connect").click(function() {
@@ -20,5 +30,4 @@ $("#connect").click(function() {
         packnum = packnum.substr(1);
     }
     socket.emit ('initiate', { botname : botname, packnum : packnum});
-    $("#connect").prop('disabled', true);
 });

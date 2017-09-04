@@ -46,7 +46,6 @@ var connectIRC = function (bot, pack) {
             console.log("[notice]", message);
         }
     });
-
     client.on('error', function(message) {
         console.error(message);
     });
