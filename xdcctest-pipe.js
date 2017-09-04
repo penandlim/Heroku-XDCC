@@ -4,10 +4,8 @@
 
 
 module.exports = function (socket) {
-    var PassThrough = require('stream').PassThrough;
 
     var module = {};
-
     var irc = require('irc');
     var pipedXdcc = require("piped-xdcc");
     var fs = require("fs");
@@ -45,7 +43,7 @@ module.exports = function (socket) {
             console.log("myConfig = " + myConfig);
             res.writeHead(200, {
                 'Content-Type': mime.contentType(myConfig.filename),
-                'Content-Disposition': 'inline; filename="' + myConfig.filename + '"; modification-date="Wed, 12 Feb 1997 16:29:51 -0500"',
+                'Content-Disposition': 'attachment; filename="' + myConfig.filename + '"; modification-date="Wed, 12 Feb 1997 16:29:51 -0500"',
                 'Content-Length' : myConfig.filesize
             });
             global.endPipe.pipe(res);
@@ -179,8 +177,6 @@ module.exports = function (socket) {
             socket.emit("errormsg", message);
             finished();
         });
-
-
     };
 
     return module;
