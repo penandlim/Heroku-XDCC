@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4388927e-a0ce-4cce-8e76-159fe9c32dfb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/mongolian/main.css" afterPath="$PROJECT_DIR$/public/mongolian/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/mongolian/main.js" afterPath="$PROJECT_DIR$/public/mongolian/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/mongolian/index.ejs" afterPath="$PROJECT_DIR$/views/mongolian/index.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xdcctest-pipe.js" afterPath="$PROJECT_DIR$/xdcctest-pipe.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xdcctest.js" afterPath="$PROJECT_DIR$/xdcctest.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,8 +44,8 @@
       <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/mongolian/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="1610" lean-forward="false" selection-start-line="7" selection-start-column="1610" selection-end-line="7" selection-end-column="1610" />
+            <state relative-caret-position="595">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,8 +84,8 @@
       <file leaf-file-name="xdcctest-pipe.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/xdcctest-pipe.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+            <state relative-caret-position="527">
+              <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
               </folding>
@@ -143,7 +139,6 @@
     <findStrings>
       <find>client.</find>
       <find>bot</find>
-      <find>finished</find>
       <find>canceled</find>
       <find>finished()</find>
       <find>global</find>
@@ -171,6 +166,7 @@
       <find>error</find>
       <find>emit</find>
       <find>copy</find>
+      <find>finished</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -430,12 +426,12 @@
       <updated>1504421196990</updated>
       <workItem from="1504421198370" duration="11004000" />
       <workItem from="1504493705455" duration="2603000" />
-      <workItem from="1504500169776" duration="34905000" />
+      <workItem from="1504500169776" duration="35104000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48512000" />
+    <option name="totallyTimeSpent" value="48711000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -817,14 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/mongolian/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="1610" lean-forward="false" selection-start-line="7" selection-start-column="1610" selection-end-line="7" selection-end-column="1610" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -849,10 +837,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/mongolian/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/xdcctest-pipe.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+        <state relative-caret-position="527">
+          <caret line="60" column="32" lean-forward="false" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>

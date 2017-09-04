@@ -49,15 +49,16 @@ module.exports = function (socket) {
             });
             global.endPipe.pipe(res);
             res.on('close', function() {
+                socket.emit("finished");
                 finished();
                 console.log('file done');
                 res.status(400);
                 res.end();
             }).on('error', function() {
+                socket.emit("error", "Connection aborted. Try again");
                 finished();
                 console.log('ERROR');
                 res.status(400);
-                res.send("Something went wrong. Try it again.");
             });
         } else {
             res.send("not initialized for some reason");
