@@ -13,11 +13,11 @@ socket.on ('usercount', function(count) {
     $("#usercount").text(count);
 });
 
-socket.on ('error', function(msg) {
+socket.on ('errormsg', function(msg) {
     $("#status").html(msg);
 });
 
-socket.on ('finished', function(msg) {
+socket.on ("file_done", function(msg) {
     $("#status").html("Copy and paste the command here: ");
 });
 

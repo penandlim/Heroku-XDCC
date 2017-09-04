@@ -21,6 +21,7 @@ module.exports = function (socket) {
         filesize : 0
     };
     global.client = null;
+    global.checkIfStuck = null;
 
 
     var finished = function() {
@@ -49,13 +50,13 @@ module.exports = function (socket) {
             });
             global.endPipe.pipe(res);
             res.on('close', function() {
-                socket.emit("finished");
                 finished();
+                socket.emit("file_done", "finished");
                 console.log('file done');
                 res.status(400);
                 res.end();
             }).on('error', function() {
-                socket.emit("error", "Connection aborted. Try again");
+                socket.emit("errormsg", "Connection aborted. Try again");
                 finished();
                 console.log('ERROR');
                 res.status(400);
@@ -99,31 +100,36 @@ module.exports = function (socket) {
                 console.log("it probably went good");
 
                 xdccInstance.on('connect', function (config) {
-                    console.log("config = " + config.filesize);
-                    global.myConfig = {
-                        command: config.command,
-                        filename: config.filename,
-                        ip : config.ip,
-                        port : config.port,
-                        filesize : config.filesize
-                    };
-                    global.lastInfo.lastTitle = config.filename;
-                    let startConfig = {
-                        filename : config.filename,
-                        ip : config.ip,
-                        port : config.port
-                    };
+                        console.log("config = " + config.filesize);
+                        global.myConfig = {
+                            command: config.command,
+                            filename: config.filename,
+                            ip : config.ip,
+                            port : config.port,
+                            filesize : config.filesize
+                        };
+                        global.lastInfo.lastTitle = config.filename;
+                        let startConfig = {
+                            filename : config.filename,
+                            ip : config.ip,
+                            port : config.port
+                        };
 
-                    setTimeout(function () {
-                        if (global.lastInfo.lastPercentage == "0" && startConfig.filename == global.lastInfo.lastTitle && startConfig.ip == global.lastInfo.ip && startConfig.port == global.lastInfo.port) {
-                            console.log("Timed out");
-                            finished();
-                        }
-                    }, 45000, startConfig);
-                    socket.emit("download", config);
-                });
+                        global.checkIfStuck = setTimeout(function () {
+                            if (global.lastInfo.lastPercentage == "0" && startConfig.filename == global.lastInfo.lastTitle && startConfig.ip == global.lastInfo.ip && startConfig.port == global.lastInfo.port) {
+                                socket.emit("errormsg", "Request timed out. Try another bot.");
+                                console.log("Timed out");
+                                finished();
+                            }
+                            global.checkIfStuck = null;
+                        }, 30000, startConfig);
+                        socket.emit("download", config);
+                    }
+                );
 
                 xdccInstance.on('progress', function (totalReceived) {
+                    clearTimeout(global.checkIfStuck);
+                    global.checkIfStuck = null;
                     let temp = Math.round((totalReceived * 100) / global.myConfig.filesize );
                     if (temp > percentage) {
                         socket.emit("downloading", {name: global.myConfig.filename, percent : temp});
@@ -134,7 +140,7 @@ module.exports = function (socket) {
                 });
 
                 xdccInstance.on('complete', function (config) {
-                    socket.emit("finished");
+                    socket.emit("file_done", "");
                     console.log("Downloaded " + config.filename + " from " + config.ip);
                     global.endPipe = null;
                     finished();
@@ -143,12 +149,12 @@ module.exports = function (socket) {
                 xdccInstance.on('dlerror', function (error, config) {
                     console.log("Error");
                     console.log(error);
-                    socket.emit("error", error);
+                    socket.emit("errormsg", error);
                     global.endPipe = null;
                     finished();
                 });
             } else {
-                socket.emit("error", message);
+                socket.emit("errormsg", message);
                 console.log(message);
                 global.endPipe = null;
                 finished();
@@ -164,12 +170,13 @@ module.exports = function (socket) {
         global.client.on('notice', function(from, to, message) {
             if (to == user && from == bot) {
                 console.log("[notice]", message);
-                socket.emit("error", message);
+                socket.emit("errormsg", message);
             }
         });
 
         global.client.on('error', function(message) {
-            console.error(message);
+            console.log("[error]", message);
+            socket.emit("errormsg", message);
             finished();
         });
 
