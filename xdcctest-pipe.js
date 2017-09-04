@@ -41,7 +41,7 @@ module.exports = function (socket) {
                     myInstance = xdccInstance;
                     myConfig = config;
                     filesize = config.filesize;
-                    socket.emit("download");
+                    socket.emit("download", config);
                     console.log("Started downloading" + config.filename + " from " + config.ip);
                 });
 

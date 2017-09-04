@@ -1,12 +1,13 @@
 var socket = io.connect();
 var el = document.getElementById('server-time');
 
-socket.on ('download', function() {
+socket.on ('download', function(config) {
+    $("#status").text("Downloading " + config.filename);
     window.location.href = 'download/';
 });
 
 socket.on ('downloading', function() {
-    $("#status").text("Someone is using the service!! Back off!!")
+    $("#status").text("Someone is using the service!! Back off!!");
 });
 
 $("#connect").click(function() {
