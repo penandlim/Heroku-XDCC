@@ -29,7 +29,6 @@ module.exports = function (socket) {
         var url = 'irc.rizon.net';
         var user = 'desu' + Math.random().toString(36).substr(7, 3);
 
-
         var pipeCallback = function (message, xdccInstance) {
             var filesize = 0;
             var percentage = 0;

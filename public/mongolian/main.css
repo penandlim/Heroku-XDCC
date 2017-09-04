@@ -6,3 +6,9 @@ input {
     width : 500px;
     text-align: center;
 }
+
+div#wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+}

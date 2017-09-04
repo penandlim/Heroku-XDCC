@@ -1,9 +1,10 @@
 var socket = io.connect();
-var el = document.getElementById('server-time');
 
 socket.on ('download', function(config) {
     $("#status").text("Downloading " + config.filename);
-    window.location.href = 'download/';
+    setTimeout(function() {
+        window.location.href = 'download/';
+    }, 3000);
 });
 
 socket.on ('downloading', function() {
