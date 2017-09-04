@@ -1,5 +1,3 @@
-var xdcctest = require('./xdcctest.js');
-
 var express = require('express');
 var app = express();
 
@@ -23,6 +21,8 @@ app.get('/mongolian/', function(request, response) {
     response.render('mongolian/index');
 });
 
+
+
 var server = app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
@@ -30,12 +30,15 @@ var server = app.listen(app.get('port'), function() {
 var io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-    console.log("client connected");
+    let xdcctestpipe = require('./xdcctest-pipe.js')(socket);
+
+    console.log("a client connected to the website");
     socket.on('disconnect', () => console.log("client disconnected"));
     socket.on('initiate', function (data) {
-        console.log("lets try calling the xdccfunction");
-        xdcctest.connectIRC(data.botname, data.packnum);
+        xdcctestpipe.connectIRC(data.botname, data.packnum);
     });
-});
+    app.get('/mongolian/download/', function(req, res){
+        xdcctestpipe.stream(req, res);
+    });
 
-setInterval(() => io.emit("time", new Date().toTimeString()), 1000);
+});
