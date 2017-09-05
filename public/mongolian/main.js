@@ -72,6 +72,7 @@ $(document).ready(function(){
         });
         list.append(unordered);
         list.append(unorderedDates);
+        $(".spinner").fadeOut();
         $("li.left").click(function() {
             $(".spinner").fadeIn();
             searchFor($(this).text());
