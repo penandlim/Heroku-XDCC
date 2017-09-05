@@ -3,7 +3,8 @@
  */
 
 
-module.exports = function (socket) {
+module.exports = function (s) {
+    var sessionid = s;
 
     var module = {};
     var irc = require('irc');
@@ -39,6 +40,7 @@ module.exports = function (socket) {
     };
 
     module.stream = function (req, res) {
+        var session = sessionid;
         if (global.endPipe !== null) {
             console.log("myConfig = " + myConfig);
             res.writeHead(200, {
@@ -48,15 +50,20 @@ module.exports = function (socket) {
             });
             global.endPipe.pipe(res);
             res.on('close', function() {
-                finished();
-                socket.emit("file_done", "finished");
+                console.log(session);
+                if (global.io.sockets.connected[session]) {
+                    global.io.sockets.connected[session].emit("download", {"finished": true});
+                }
+                console.log('SOCKETPLZ');
                 console.log('file done');
-                res.status(400);
-                res.end();
-            }).on('error', function() {
-                socket.emit("errormsg", "Connection aborted. Try again");
                 finished();
+                res.status(400);
+            }).on('error', function() {
+                if (global.io.sockets.connected[session]) {
+                    global.io.sockets.connected[session].emit("errormsg", "Connection aborted. Try again");
+                }
                 console.log('ERROR');
+                finished();
                 res.status(400);
             });
         } else {
@@ -115,13 +122,13 @@ module.exports = function (socket) {
 
                         global.checkIfStuck = setTimeout(function () {
                             if (global.lastInfo.lastPercentage == "0" && startConfig.filename == global.lastInfo.lastTitle && startConfig.ip == global.lastInfo.ip && startConfig.port == global.lastInfo.port) {
-                                socket.emit("errormsg", "Request timed out. Try another bot.");
+                                global.io.sockets.connected[sessionid].emit("errormsg", "Request timed out. Try another bot.");
                                 console.log("Timed out");
                                 finished();
                             }
                             global.checkIfStuck = null;
                         }, 30000, startConfig);
-                        socket.emit("download", config);
+                    global.io.sockets.connected[sessionid].emit("download", config);
                     }
                 );
 
@@ -130,7 +137,7 @@ module.exports = function (socket) {
                     global.checkIfStuck = null;
                     let temp = Math.round((totalReceived * 100) / global.myConfig.filesize );
                     if (temp > percentage) {
-                        socket.emit("downloading", {name: global.myConfig.filename, percent : temp});
+                        global.io.sockets.connected[sessionid].emit("downloading", {name: global.myConfig.filename, percent : temp});
                         global.lastInfo.lastPercentage = temp;
                         console.log( percentage + "% " + totalReceived + " / " + global.myConfig.filesize);
                         percentage = temp;
@@ -138,7 +145,7 @@ module.exports = function (socket) {
                 });
 
                 xdccInstance.on('complete', function (config) {
-                    socket.emit("file_done", "");
+                    global.io.sockets.connected[sessionid].emit("download", {finished : true});
                     console.log("Downloaded " + config.filename + " from " + config.ip);
                     global.endPipe = null;
                     finished();
@@ -147,12 +154,12 @@ module.exports = function (socket) {
                 xdccInstance.on('dlerror', function (error, config) {
                     console.log("Error");
                     console.log(error);
-                    socket.emit("errormsg", error);
+                    global.io.sockets.connected[sessionid].emit("errormsg", error);
                     global.endPipe = null;
                     finished();
                 });
             } else {
-                socket.emit("errormsg", message);
+                global.io.sockets.connected[sessionid].emit("errormsg", message);
                 console.log(message);
                 global.endPipe = null;
                 finished();
@@ -168,13 +175,13 @@ module.exports = function (socket) {
         global.client.on('notice', function(from, to, message) {
             if (to == user && from == bot) {
                 console.log("[notice]", message);
-                socket.emit("errormsg", message);
+                global.io.sockets.connected[sessionid].emit("errormsg", message);
             }
         });
 
         global.client.on('error', function(message) {
             console.log("[error]", message);
-            socket.emit("errormsg", message);
+            global.io.sockets.connected[sessionid].emit("errormsg", message);
             finished();
         });
     };

@@ -1,12 +1,22 @@
 var socket = io.connect();
 
 socket.on ('download', function(config) {
-    window.location.href = 'download/';
-    $("#status").text("Fetching " + config.filename + "...\nPlease wait...");
+    console.log(config);
+    if (config.finished) {
+        _rotSpeed = 1;
+        $("#status").text("Copy and paste the command here: ");
+        $(".spinner").fadeOut();
+    } else {
+        _rotSpeed = 3.5;
+        window.location.href = 'download/';
+        $("#status").text("Fetching " + config.filename + "...\nPlease wait...");
+    }
 });
 
 socket.on ('wait', function(lastinfo) {
+    _rotSpeed = 1;
     $("#status").html("Sorry please try again a bit later!\nSomeone is downloading... \n<b>" + lastinfo.lastTitle + "</b>\nIt's currently at <b>" + lastinfo.lastPercentage + "</b>%");
+    $(".spinner").fadeOut();
 });
 
 socket.on ('usercount', function(count) {
@@ -14,14 +24,14 @@ socket.on ('usercount', function(count) {
 });
 
 socket.on ('errormsg', function(msg) {
+    _rotSpeed = 1;
     $("#status").html(msg);
-});
-
-socket.on ("file_done", function(msg) {
-    $("#status").html("Copy and paste the command here: ");
+    $(".spinner").fadeOut();
 });
 
 $("#connect").click(function() {
+    _rotSpeed = 2;
+    $(".spinner").fadeIn();
     $("#status").text("Connecting to Rizon #NIBL");
     var s = $("#command").val().split(" ");
     var botname = s[1];
@@ -45,30 +55,50 @@ $(document).ready(function(){
     adjustLayout();
     $.get("https://horriblesubs.info/rss.php?res=1080", function (data) {
         var list = $("#rsswrapper");
-        list.html($('<p/>').text($(data).find("channel").find("description").text()));
+        list.html($('<p/>').addClass("rss").text($(data).find("channel").find("description").text()));
         var unordered = $("<ul/>").addClass("left");
         var unorderedDates = $("<ul/>").addClass("right");
         var curDate = new Date();
         var pubDates = [];
         $(data).find("item").each(function () { // or "item" or whatever suits your feed
             var el = $(this);
-            console.log("------------------------");
-            console.log("title      : " + el.find("title").text());
-            console.log("pub date   : " + el.find("pubDate").text());
             var pubdate = timeDifference(curDate, new Date(el.find("pubDate").text()));
 
             var name = el.find("title").text().substr(15);
             name = name.substr(0, name.indexOf("[1080p].mkv"));
-            var title = $('<li/>').addClass("left").text(name);
+            var title = $('<li/>').addClass("left").append($("<span/>").addClass("animetitle").text(name));
             unordered.append(title);
-            unorderedDates.append($('<li/>').addClass("right").text(pubdate));
+            unorderedDates.append($('<li/>').addClass("right").append().text(pubdate));
         });
         list.append(unordered);
-        list.append(unorderedDates)
+        list.append(unorderedDates);
+        $("li.left").click(function() {
+            $(".spinner").fadeIn();
+            searchFor($(this).text());
+            }
+        );
     });
 });
 
+function searchFor(animeTitle) {
+    $.get("https://nibl.co.uk/bots.php?search=" + encodeURIComponent("[HorribleSubs] " + animeTitle + " [1080p].mkv"), function (data) {
+        var results = [];
+        $(data).find(".botlistitem").each(function () {
+            if (!this.getAttribute("botname").includes("v6")) {
+                results.push("/msg " + this.getAttribute("botname") + " xdcc send #" + this.getAttribute("botpack"));
+            }
+        });
+        var result = results[Math.floor(Math.random()*results.length)];
+        console.log(result);
+        $(".spinner").fadeOut();
+        $("#command").val(result);
+    });
+}
+
+
 function adjustLayout() {
+
+
     var wheight = $(window).height();
     var wrapperheight = $("#wrapper").height();
     var howmuch = ( wheight * 0.55 - wrapperheight ) / 2;

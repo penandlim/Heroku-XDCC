@@ -39,6 +39,7 @@ div#wrapper {
     left:50%;
     background : rgba(255,255,255,0.6);
     padding: 15px;
+    outline:5px solid rgba(255,255,255,0.6);
 }
 
 div#rsswrapper {
@@ -50,6 +51,11 @@ div#rsswrapper {
     padding: 15px;
     overflow-y:scroll;
     overflow-x:hidden;
+    outline:5px solid rgba(255,255,255,0.6);
+}
+
+.rss {
+    font-weight: bold;
 }
 
 #bigwrap {
@@ -66,9 +72,20 @@ div#rsswrapper {
 }
 
 #credits {
+    background:rgba(255,255,255,0.5);
     margin-top : 0;
     text-align : right;
     font-style : italic;
+    font-weight: bolder;
+    padding: 15px;
+}
+
+div#quote {
+    text-align: right;
+    position:fixed;
+    top: 73%;
+    right: 53%;
+    margin-right: 110px;
 }
 
 #status {
@@ -175,4 +192,60 @@ ul.right {
 {
     background-color: #000000;
     border: 2px solid #555555;
+}
+
+.animetitle {
+    border-bottom: thin dotted rgba(0,0,0,0.5);
+}
+.animetitle:hover {
+    border-bottom: thin solid rgba(0,0,0,0.8);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
+
+.spinner {
+    width: 40px;
+    height: 40px;
+
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    display:none;
+}
+
+.double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    } 50% {
+          transform: scale(1.0);
+          -webkit-transform: scale(1.0);
+      }
 }

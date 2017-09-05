@@ -1,4 +1,4 @@
-var renderer, scene, camera, composer, circle, skelet, particle;
+var renderer, scene, camera, composer, circle, skelet, particle, tanFOV, windowHeight, _rotSpeed = 1;
 
 window.onload = function() {
     init();
@@ -78,28 +78,62 @@ function init() {
     scene.add( lights[0] );
     scene.add( lights[1] );
     scene.add( lights[2] );
-
+    tanFOV = Math.tan( ( ( Math.PI / 180 ) * camera.fov / 2 ) );
+    windowHeight = 1080;
+    onWindowResize();
 
     window.addEventListener('resize', onWindowResize, false);
 
 }
 
 function onWindowResize() {
+
     camera.aspect = window.innerWidth / window.innerHeight;
+
+    // adjust the FOV
+    camera.fov = ( 360 / Math.PI ) * Math.atan( tanFOV * ( window.innerHeight / 1080 ) );
+
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.render( scene, camera );
 }
 
 function animate() {
     requestAnimationFrame(animate);
 
     particle.rotation.x += 0.0000;
-    particle.rotation.y -= 0.0040;
-    circle.rotation.x -= 0.0020;
-    circle.rotation.y -= 0.0030;
-    skelet.rotation.x -= 0.0010;
-    skelet.rotation.y += 0.0020;
+    particle.rotation.y -= 0.0040 * _rotSpeed;
+    circle.rotation.x -= 0.0020 * _rotSpeed;
+    circle.rotation.y -= 0.0030 * _rotSpeed;
+    skelet.rotation.x -= 0.0010 * _rotSpeed;
+    skelet.rotation.y += 0.0020 * _rotSpeed;
     renderer.clear();
 
     renderer.render( scene, camera );
+}
+
+function toScreenPosition(obj, camera)
+{
+    var vector = new THREE.Vector3();
+
+    var widthHalf = 0.5 * window.innerWidth;
+    var heightHalf = 0.5 * window.innerHeight;
+
+    obj.updateMatrixWorld();
+    vector.setFromMatrixPosition(obj.matrixWorld);
+    vector.project(camera);
+
+    vector.x = ( vector.x * widthHalf ) + widthHalf;
+    vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+    return {
+        x: vector.x,
+        y: vector.y
+    };
+
+}
+
+function getCirclePos() {
+    return toScreenPosition(circle, camera);
 }

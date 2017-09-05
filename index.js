@@ -10,6 +10,7 @@ global.lastInfo = {
 };
 global.botname = "";
 global.endPipe = null;
+global.allClients = [];
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -39,19 +40,18 @@ var server = app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-var io = require('socket.io')(server);
+global.io = require('socket.io')(server);
 
-io.on('connection', (socket) => {
+global.io.on('connection', (socket) => {
+    var sessionid = socket.id;
 
-    let xdcctestpipe = require('./xdcctest-pipe.js')(socket);
+    var xdcctestpipe = require('./xdcctest-pipe.js')(sessionid);
     global.userCount++;
-    userCountUpdate(socket);
-    var autoupdate = setInterval( function() { userCountUpdate(socket); }, 5000);
+    userCountUpdate();
 
     socket.on('disconnect', function () {
-        clearInterval(autoupdate);
         global.userCount--;
-        userCountUpdate(socket);
+        userCountUpdate();
     });
     socket.on('initiate', function (data) {
         if (global.lastInfo.busy) {
@@ -68,12 +68,9 @@ io.on('connection', (socket) => {
     app.get('/mongolian/cancel/', function(req, res){
         xdcctestpipe.cancel(req, res);
     });
-
-
-
 });
 
-function userCountUpdate(socket) {
-    socket.emit('usercount', global.userCount);
+function userCountUpdate() {
+    global.io.sockets.emit('usercount', global.userCount);
 }
 
