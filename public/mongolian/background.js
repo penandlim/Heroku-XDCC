@@ -5,6 +5,14 @@ window.onload = function() {
     animate();
 };
 
+var startupsound = new Howl({
+    src: ['start.wav']
+});
+startupsound.on('end', function(){
+    startupsound.unload();
+});
+
+
 function init() {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio((window.devicePixelRatio) ? window.devicePixelRatio : 1);
@@ -83,7 +91,10 @@ function init() {
     onWindowResize();
 
     window.addEventListener('resize', onWindowResize, false);
-    setTimeout(function() {$('#canvas').css('visibility','visible').hide().fadeIn(2000)}, 2000);
+    setTimeout(function() {
+        $('#canvas').css('visibility','visible').hide().fadeIn(2000);
+        startupsound.play();
+    }, 2000);
 }
 
 function onWindowResize() {

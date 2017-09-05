@@ -1,3 +1,5 @@
+
+
 var socket = io.connect();
 
 socket.on ('download', function(config) {
@@ -82,7 +84,9 @@ $(document).ready(function(){
         );
     });
     $('#wrapper').css('visibility','visible').hide().fadeIn(1000);
-    setTimeout(function(){$('#rsswrapper').css('visibility','visible').hide().fadeIn(1000)}, 500);
+    setTimeout(function(){
+        $('#rsswrapper').css('visibility','visible').hide().fadeIn(1000)
+    }, 500);
     setTimeout(function(){$('#quote').css('visibility','visible').hide().fadeIn(2000)}, 4000);
 });
 
