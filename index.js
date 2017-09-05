@@ -10,7 +10,15 @@ global.lastInfo = {
 };
 global.botname = "";
 global.endPipe = null;
-global.allClients = [];
+global.myConfig = {
+    command: "",
+    filename: "",
+    ip : "",
+    port : 0,
+    filesize : 0
+};
+global.client = null;
+global.checkIfStuck = null;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -45,7 +53,7 @@ global.io = require('socket.io')(server);
 global.io.on('connection', (socket) => {
     var sessionid = socket.id;
 
-    var xdcctestpipe = require('./xdcctest-pipe.js')(sessionid);
+    var xdcctestpipe = new require('./xdcctest-pipe.js')(sessionid);
     global.userCount++;
     userCountUpdate();
 

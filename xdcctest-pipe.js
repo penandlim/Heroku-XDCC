@@ -12,17 +12,6 @@ module.exports = function (s) {
     var fs = require("fs");
     var mime = require('mime-types');
 
-    global.myConfig = {
-        command: "",
-        filename: "",
-        ip : "",
-        port : 0,
-        filesize : 0
-    };
-    global.client = null;
-    global.checkIfStuck = null;
-
-
     var finished = function() {
         if (global.client !== null) {
             global.client.say(global.botname, "XDCC CANCEL");
@@ -122,7 +111,9 @@ module.exports = function (s) {
 
                         global.checkIfStuck = setTimeout(function () {
                             if (global.lastInfo.lastPercentage == "0" && startConfig.filename == global.lastInfo.lastTitle && startConfig.ip == global.lastInfo.ip && startConfig.port == global.lastInfo.port) {
-                                global.io.sockets.connected[sessionid].emit("errormsg", "Request timed out. Try another bot.");
+                                if (global.io.sockets.connected[sessionid]) {
+                                    global.io.sockets.connected[sessionid].emit("errormsg", "Request timed out. Try another bot.");
+                                }
                                 console.log("Timed out");
                                 finished();
                             }
@@ -137,7 +128,9 @@ module.exports = function (s) {
                     global.checkIfStuck = null;
                     let temp = Math.round((totalReceived * 100) / global.myConfig.filesize );
                     if (temp > percentage) {
-                        global.io.sockets.connected[sessionid].emit("downloading", {name: global.myConfig.filename, percent : temp});
+                        if (global.io.sockets.connected[sessionid]) {
+                            global.io.sockets.connected[sessionid].emit("downloading", {name: global.myConfig.filename, percent : temp});
+                        }
                         global.lastInfo.lastPercentage = temp;
                         console.log( percentage + "% " + totalReceived + " / " + global.myConfig.filesize);
                         percentage = temp;
@@ -145,7 +138,9 @@ module.exports = function (s) {
                 });
 
                 xdccInstance.on('complete', function (config) {
-                    global.io.sockets.connected[sessionid].emit("download", {finished : true});
+                    if (global.io.sockets.connected[sessionid]) {
+                        global.io.sockets.connected[sessionid].emit("download", {finished : true});
+                    }
                     console.log("Downloaded " + config.filename + " from " + config.ip);
                     global.endPipe = null;
                     finished();
@@ -154,12 +149,16 @@ module.exports = function (s) {
                 xdccInstance.on('dlerror', function (error, config) {
                     console.log("Error");
                     console.log(error);
-                    global.io.sockets.connected[sessionid].emit("errormsg", error);
+                    if (global.io.sockets.connected[sessionid]) {
+                        global.io.sockets.connected[sessionid].emit("errormsg", error);
+                    }
                     global.endPipe = null;
                     finished();
                 });
             } else {
-                global.io.sockets.connected[sessionid].emit("errormsg", message);
+                if (global.io.sockets.connected[sessionid]) {
+                    global.io.sockets.connected[sessionid].emit("errormsg", message);
+                }
                 console.log(message);
                 global.endPipe = null;
                 finished();
@@ -175,13 +174,17 @@ module.exports = function (s) {
         global.client.on('notice', function(from, to, message) {
             if (to == user && from == bot) {
                 console.log("[notice]", message);
+                if (global.io.sockets.connected[sessionid]) {
                 global.io.sockets.connected[sessionid].emit("errormsg", message);
+                }
             }
         });
 
         global.client.on('error', function(message) {
             console.log("[error]", message);
-            global.io.sockets.connected[sessionid].emit("errormsg", message);
+            if (global.io.sockets.connected[sessionid]) {
+                global.io.sockets.connected[sessionid].emit("errormsg", message);
+            }
             finished();
         });
     };
