@@ -16,6 +16,14 @@ html {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11e8bb', endColorstr='#8200c9',GradientType=0 ); /* IE6-9 */
 }
 
+#donate > img {
+    width:150px;
+    height:150px;
+    position: fixed;
+    left:5px;
+    bottom:5px;
+}
+
 
 #full-size{
 
