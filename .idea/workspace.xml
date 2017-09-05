@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4388927e-a0ce-4cce-8e76-159fe9c32dfb" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/mongolian/background.js" afterPath="$PROJECT_DIR$/public/mongolian/background.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/mongolian/main.css" afterPath="$PROJECT_DIR$/public/mongolian/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/mongolian/main.js" afterPath="$PROJECT_DIR$/public/mongolian/main.js" />
     </list>
@@ -24,8 +26,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/mongolian/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+            <state relative-caret-position="262">
+              <caret line="90" column="136" lean-forward="false" selection-start-line="90" selection-start-column="136" selection-end-line="90" selection-end-column="136" />
               <folding />
             </state>
           </provider>
@@ -34,8 +36,8 @@
       <file leaf-file-name="background.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/mongolian/background.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="113" column="1" lean-forward="true" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="1" />
+            <state relative-caret-position="459">
+              <caret line="84" column="61" lean-forward="true" selection-start-line="84" selection-start-column="61" selection-end-line="84" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -44,8 +46,8 @@
       <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/mongolian/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="28" column="10" lean-forward="false" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
+            <state relative-caret-position="255">
+              <caret line="18" column="20" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -54,7 +56,7 @@
       <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package-lock.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
+            <state relative-caret-position="499">
               <caret line="1293" column="71" lean-forward="true" selection-start-line="1293" selection-start-column="71" selection-end-line="1293" selection-end-column="71" />
               <folding />
             </state>
@@ -64,8 +66,8 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/mongolian/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="222" column="15" lean-forward="false" selection-start-line="222" selection-start-column="15" selection-end-line="222" selection-end-column="15" />
+            <state relative-caret-position="415">
+              <caret line="63" column="23" lean-forward="false" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -135,11 +137,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>haha</find>
       <find>spinner</find>
       <find>spin</find>
       <find>overflow</find>
-      <find>rss</find>
       <find>input</find>
       <find>c</find>
       <find>cred</find>
@@ -153,18 +153,20 @@
       <find>handleMessage</find>
       <find>parseMessage</find>
       <find>pipe</find>
-      <find>fade</find>
       <find>emit</find>
       <find>socketplz</find>
       <find>socket</find>
       <find>io</find>
+      <find>5.</find>
+      <find>display</find>
+      <find>rss</find>
+      <find>canvas</find>
+      <find>fade</find>
       <find>io.</find>
       <find>quote</find>
-      <find>circle</find>
-      <find>5.</find>
-      <find>copyt</find>
       <find>npm</find>
-      <find>display</find>
+      <find>copyt</find>
+      <find>circle</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -183,11 +185,11 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/views/partials/header.ejs" />
         <option value="$PROJECT_DIR$/node_modules/piped-xdcc/lib/piped_xdcc.js" />
-        <option value="$PROJECT_DIR$/public/mongolian/background.js" />
         <option value="$PROJECT_DIR$/xdcctest-pipe.js" />
         <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/views/mongolian/index.ejs" />
         <option value="$PROJECT_DIR$/public/mongolian/main.css" />
+        <option value="$PROJECT_DIR$/public/mongolian/background.js" />
         <option value="$PROJECT_DIR$/public/mongolian/main.js" />
       </list>
     </option>
@@ -429,15 +431,15 @@
       <workItem from="1504421198370" duration="11004000" />
       <workItem from="1504493705455" duration="2603000" />
       <workItem from="1504500169776" duration="42516000" />
-      <workItem from="1504553510377" duration="19226000" />
+      <workItem from="1504553510377" duration="19997000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75349000" />
+    <option name="totallyTimeSpent" value="76120000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -782,42 +784,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/mongolian/background.js">
+    <entry file="file://$PROJECT_DIR$/public/mongolian/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="113" column="1" lean-forward="true" selection-start-line="113" selection-start-column="1" selection-end-line="113" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/mongolian/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="28" column="10" lean-forward="false" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
+        <state relative-caret-position="415">
+          <caret line="63" column="23" lean-forward="false" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
+        <state relative-caret-position="499">
           <caret line="1293" column="71" lean-forward="true" selection-start-line="1293" selection-start-column="71" selection-end-line="1293" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/mongolian/main.css">
+    <entry file="file://$PROJECT_DIR$/views/mongolian/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="222" column="15" lean-forward="false" selection-start-line="222" selection-start-column="15" selection-end-line="222" selection-end-column="15" />
+        <state relative-caret-position="255">
+          <caret line="18" column="20" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/mongolian/background.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="84" column="61" lean-forward="true" selection-start-line="84" selection-start-column="61" selection-end-line="84" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/mongolian/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
+        <state relative-caret-position="262">
+          <caret line="90" column="136" lean-forward="false" selection-start-line="90" selection-start-column="136" selection-end-line="90" selection-end-column="136" />
           <folding />
         </state>
       </provider>

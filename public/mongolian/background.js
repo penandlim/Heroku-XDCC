@@ -83,6 +83,7 @@ function init() {
     onWindowResize();
 
     window.addEventListener('resize', onWindowResize, false);
+    $('#canvas').css('visibility','visible').hide().fadeIn(2000);
 
 }
 

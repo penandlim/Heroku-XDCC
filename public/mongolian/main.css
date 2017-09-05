@@ -48,6 +48,7 @@ div#wrapper {
     background : rgba(255,255,255,0.6);
     padding: 15px;
     outline:5px solid rgba(255,255,255,0.6);
+    visibility: hidden;
 }
 
 div#rsswrapper {
@@ -60,6 +61,7 @@ div#rsswrapper {
     overflow-y:scroll;
     overflow-x:hidden;
     outline:5px solid rgba(255,255,255,0.6);
+    visibility: hidden;
 }
 
 .rss {
@@ -69,6 +71,7 @@ div#rsswrapper {
 #bigwrap {
     text-align: left;
     height: 100%;
+
 }
 
 #buttonwrapper {
@@ -94,6 +97,7 @@ div#quote {
     top: 73%;
     right: 53%;
     margin-right: 110px;
+    visibility: hidden;
 }
 
 #status {
@@ -156,6 +160,7 @@ pre {
 }
 
 #canvas {
+    visibility: hidden;
     position:fixed;
 }
 

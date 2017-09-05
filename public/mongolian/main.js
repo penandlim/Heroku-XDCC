@@ -49,9 +49,11 @@ jQuery.ajaxPrefilter(function(options) {
 });
 
 /* use as handler for resize*/
+
 $(window).resize(adjustLayout);
 /* call function in ready handler*/
 $(document).ready(function(){
+
     adjustLayout();
     $.get("https://horriblesubs.info/rss.php?res=1080", function (data) {
         var list = $("#rsswrapper");
@@ -75,13 +77,17 @@ $(document).ready(function(){
         $(".spinner").fadeOut();
         $("li.left").click(function() {
             $(".spinner").fadeIn();
-            searchFor($(this).text());
+                searchFor($(this).text());
             }
         );
     });
+    $('#wrapper').css('visibility','visible').hide().fadeIn(1000);
+    setTimeout(function(){$('#rsswrapper').css('visibility','visible').hide().fadeIn(1000)}, 500);
+    setTimeout(function(){$('#quote').css('visibility','visible').hide().fadeIn(2000)}, 4000);
 });
 
 function searchFor(animeTitle) {
+    $("#command").val("...");
     $.get("https://nibl.co.uk/bots.php?search=" + encodeURIComponent("[HorribleSubs] " + animeTitle + " [1080p].mkv"), function (data) {
         var results = [];
         $(data).find(".botlistitem").each(function () {
