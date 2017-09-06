@@ -31,6 +31,7 @@ module.exports = function (s) {
     module.stream = function (req, res) {
         var session = sessionid;
         if (global.endPipe !== null) {
+
             console.log("myConfig = " + myConfig);
             res.writeHead(200, {
                 'Content-Type': mime.contentType(myConfig.filename),
@@ -38,6 +39,7 @@ module.exports = function (s) {
                 'Content-Length' : myConfig.filesize
             });
             global.endPipe.pipe(res);
+
             res.on('close', function() {
                 console.log(session);
                 if (global.io.sockets.connected[session]) {

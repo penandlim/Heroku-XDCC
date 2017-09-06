@@ -94,8 +94,8 @@ div#rsswrapper {
 div#quote {
     text-align: right;
     position:fixed;
-    top: 73%;
-    right: 53%;
+    /*top: 73%;*/
+    /*right: 53%;*/
     margin-right: 110px;
     visibility: hidden;
 }
