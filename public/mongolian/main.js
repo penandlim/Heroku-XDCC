@@ -92,17 +92,23 @@ $(document).ready(function(){
 
 function searchFor(animeTitle) {
     $("#command").val("...");
-    $.get("https://nibl.co.uk/bots.php?search=" + encodeURIComponent("[HorribleSubs] " + animeTitle + " [1080p].mkv"), function (data) {
+    var searchString = "[HorribleSubs] " + animeTitle + " [1080p].mkv";
+    $.get("https://nibl.co.uk/bots.php?search=" + encodeURIComponent(searchString), function (data) {
         var results = [];
         $(data).find(".botlistitem").each(function () {
-            if (!this.getAttribute("botname").includes("v6")) {
+            if (!this.getAttribute("botname").includes("v6") && $(this).find(".filename").text().includes(animeTitle)) {
+                console.log(this);
                 results.push("/msg " + this.getAttribute("botname") + " xdcc send #" + this.getAttribute("botpack"));
             }
         });
-        var result = results[Math.floor(Math.random()*results.length)];
-        console.log(result);
         $(".spinner").fadeOut();
-        $("#command").val(result);
+        if (results.length > 0) {
+            var result = results[Math.floor(Math.random()*results.length)];
+            console.log(result);
+            $("#command").val(result);
+        } else {
+            $("#command").val("Please manually copy and paste the command.");
+        }
     });
 }
 
