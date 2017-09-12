@@ -1,21 +1,22 @@
-# node-js-getting-started
+# Heroku XDCC
+## AKA Mongolian Cartoons
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
-
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+A Node.js App that lets you download files from [NIBL](https://nibl.co.uk/bots.php) IRC server on rizon.
 
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
 
 ```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
+$ git clone https://github.com/penandlim/Heroku-XDCC # or clone your own fork
+$ cd Heroku-XDCC
 $ npm install
 $ npm start
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
+
+You probably want to access [localhost:5000/mongolian/](http://localhost:5000/mongolian/).
 
 ## Deploying to Heroku
 
