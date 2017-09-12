@@ -1,7 +1,10 @@
 # Heroku XDCC
 ## AKA Mongolian Cartoons
 
+![Screenshot](http://i.imgur.com/WxGPDgq.png)
+
 A Node.js App that lets you download files from [NIBL](https://nibl.co.uk/bots.php) IRC server on rizon.
+This can be further customized and expanded by changing the irc server ip.
 
 ## Running Locally
 
