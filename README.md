@@ -3,7 +3,7 @@
 
 ![Screenshot](http://i.imgur.com/WxGPDgq.png)
 
-A Node.js App that lets you download files from [NIBL](https://nibl.co.uk/bots.php) IRC server on rizon.
+A Node.js App that lets you download files from [#NIBL](https://nibl.co.uk/bots.php) channel on Rizon IRC server.
 This can be further customized and expanded by changing the irc server ip.
 
 ## Running Locally

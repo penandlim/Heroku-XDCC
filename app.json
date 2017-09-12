@@ -1,8 +1,8 @@
 {
-  "name": "Start on Heroku: Node.js",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-getting-started",
+  "name": "Heroku-XDCC",
+  "description": "A Node.js App that lets you download files from #NIBL channel on Rizon IRC server.",
+  "repository": "https://github.com/penandlim/Heroku-XDCC",
   "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
-  "keywords": ["node", "express", "heroku"],
+  "keywords": ["node", "express", "heroku", "anime", "xdcc", "irc", "socketio"],
   "image": "heroku/nodejs"
 }
