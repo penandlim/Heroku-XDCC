@@ -1,7 +1,7 @@
 # Heroku XDCC
 ## AKA Mongolian Cartoons
 
-![GifPreview](https://thumbs.gfycat.com/ComfortableCloudyCow-max-14mb.gif)
+![Gif Preview](https://thumbs.gfycat.com/ComfortableCloudyCow-size_restricted.gif)
 ![Screenshot](http://i.imgur.com/WxGPDgq.png)
 
 A Node.js App that lets you download files from [#NIBL](https://nibl.co.uk/bots.php) channel on Rizon IRC server.
