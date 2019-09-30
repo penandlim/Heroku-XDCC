@@ -1,7 +1,11 @@
-global.userCount = 0;
 
-var express = require('express');
-var app = express();
+
+const express = require('express');
+const app = express();
+
+let global = {};
+
+global.userCount = 0;
 
 global.lastInfo = {
     busy : false,

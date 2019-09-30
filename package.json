@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A Node.js App that lets you download files from #NIBL channel on Rizon IRC server",
   "engines": {
-    "node": "6.11.1"
+    "node": "10.16.3"
   },
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "dependencies": {
     "ejs": "2.5.6",
     "express": "4.15.2",
-    "irc": "martynsmith/node-irc",
+    "irc": "Throne3d/node-irc",
     "mime-types": "^2.1.17",
     "piped-xdcc": "penandlim/piped-xdcc",
     "socket.io": "^2.0.3"

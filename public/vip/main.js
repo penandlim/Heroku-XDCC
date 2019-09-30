@@ -1,45 +1,6 @@
 /**
  * Created by John LIm on 9/2/2017.
  */
-// function createCORSRequest(method, url) {
-//     var xhr = new XMLHttpRequest();
-//     if ("withCredentials" in xhr) {
-//
-//         // Check if the XMLHttpRequest object has a "withCredentials" property.
-//         // "withCredentials" only exists on XMLHTTPRequest2 objects.
-//         xhr.open(method, url, true);
-//
-//     } else if (typeof XDomainRequest != "undefined") {
-//
-//         // Otherwise, check if XDomainRequest.
-//         // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-//         xhr = new XDomainRequest();
-//         xhr.open(method, url);
-//
-//     } else {
-//
-//         // Otherwise, CORS is not supported by the browser.
-//         xhr = null;
-//
-//     }
-//     return xhr;
-// }
-
-
-var xhr = function() {
-    var xhr = new XMLHttpRequest();
-    return function( method, url, callback ) {
-        xhr.onreadystatechange = function() {
-            if ( xhr.readyState == 4 ) {
-                if (xhr.status == 200) {
-                    callback( xhr.responseXML );
-                }
-            }
-        };
-        xhr.open( method, url );
-        xhr.send();
-    };
-}();
 
 var txt = "";
 
@@ -246,29 +207,18 @@ function processData(data) {
     }, 500);
 }
 
+$.ajaxPrefilter( function (options) {
+    if (options.crossDomain && jQuery.support.cors) {
+        var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+        options.url = http + '//whispering-cove-34357.herokuapp.com/' + options.url;
+    }
+});
 
 $(function() {
-    var url = 'http://vip.aersia.net/roster.xml';
+    var url = 'http://vip.aersia.net/roster.xml?';
 
-    // $.ajaxPrefilter( function (options) {
-    //     if (options.crossDomain && jQuery.support.cors) {
-    //         var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
-    //         options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
-    //         //options.url = "http://cors.corsproxy.io/url=" + options.url;
-    //     }
-    // });
-    //
-    // $.get(
-    //     url,
-    //     function (response) {
-    //         console.log("> ", response);
-    //         processData(response)
-    //     });
-
-    xhr('get', 'http://vip.aersia.net/roster.xml?' + Math.round(Math.random() * 10000) , function(data) {
-        // console.log(data);
+    $.get(url + Math.round(Math.random() * 1000000), function(data, status){
         processData(data);
-    });
-
+    })
 });
 
