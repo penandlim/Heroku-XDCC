@@ -3,8 +3,6 @@
 const express = require('express');
 const app = express();
 
-let global = {};
-
 global.userCount = 0;
 
 global.lastInfo = {
