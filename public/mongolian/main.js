@@ -46,12 +46,18 @@ $("#connect").click(function() {
 
 jQuery.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
-        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+        if (window.location.href.includes("mongolian")) {
+            // My private Node.js router server for CORS.
+            options.url = 'https://whispering-cove-34357.herokuapp.com/' + options.url;
+        } else {
+            // Highly recommend to change this to your own server!
+            options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+        }
+
     }
 });
 
 /* use as handler for resize*/
-
 $(window).resize(adjustLayout);
 /* call function in ready handler*/
 $(document).ready(function(){
