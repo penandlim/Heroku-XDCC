@@ -16,7 +16,7 @@
     "irc": "Throne3d/node-irc",
     "mime-types": "^2.1.24",
     "piped-xdcc": "penandlim/piped-xdcc",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.5.0"
   },
   "devDependencies": {
     "request": "^2.88.0",
